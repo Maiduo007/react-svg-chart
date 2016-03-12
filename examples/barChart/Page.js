@@ -8,10 +8,18 @@ const Page = ({ app }) => (
   <html lang="en">
     <head>
       <style>{ `
-        select,
-        .chart {
-          margin-top: 20px;
-          padding: 10px 10px 10px 0;
+        html,
+        body,
+        .app,
+        .content {
+          height: 100%;
+          margin: 0;
+        }
+
+        select {
+          position: absolute;
+          right: 10px;
+          top: 10px;
         }
 
         select {
@@ -20,6 +28,10 @@ const Page = ({ app }) => (
 
         .chart {
           background-color: rgb(240,240,240);
+          box-sizing: border-box;
+          height: 100%;
+          padding: 40px 10px 10px 0;
+          width: 100%;
         }
 
         .chart:after {

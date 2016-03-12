@@ -49,7 +49,7 @@ const App = createClass({
 
   render () {
     return (
-      <section>
+      <section className="content">
         <select onChange={ this.onChange }>
           { days.map(( day, i ) => (
             <option key={ i } value={ i }>{ day.title }</option>
@@ -58,6 +58,7 @@ const App = createClass({
         <BarChart
           chartClassName="chart"
           bars={ this.state.day.bars }
+          preserveAspectRatio="xMinYMid meet"
         />
       </section>
     );
