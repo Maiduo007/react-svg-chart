@@ -8,6 +8,7 @@ const BarChart = createClass({
     chartClassName: PropTypes.string,
     easing: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
     height: PropTypes.number,
+    preserveAspectRatio: PropTypes.string,
     spacing: PropTypes.number,
     width: PropTypes.number,
   },
@@ -17,6 +18,7 @@ const BarChart = createClass({
       duration: 750,
       easing: 'easeOutBounce',
       height: 500,
+      preserveAspectRatio: 'xMidYMid meet',
       spacing: 10,
       width: 800,
     };
@@ -45,6 +47,7 @@ const BarChart = createClass({
       <svg
         className={ this.props.chartClassName }
         height={ this.props.height }
+        preserveAspectRatio={ this.props.preserveAspectRatio }
         width={ this.props.width }
         viewBox={ `0 0 ${ this.props.width } ${ this.props.height }` }
       >
