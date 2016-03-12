@@ -26,13 +26,9 @@ const BarChart = createClass({
 
   getInitialState () {
     return {
-      bars: this.props.bars.map( b => ({ ...b, value: 0 })),
       barHeight: ( this.props.height - this.props.spacing * ( this.props.bars.length - 1 )) / this.props.bars.length,
+      bars: this.relativeBars( this.props.bars ),
     };
-  },
-
-  componentDidMount () {
-    this.animateBars( this.state.bars, this.relativeBars( this.props.bars ));
   },
 
   componentWillReceiveProps ({ bars }) {
