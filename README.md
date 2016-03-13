@@ -10,6 +10,8 @@ npm install react-svg-chart
 
 ## Usage
 
+### Bar chart
+
 ```js
 import React from 'react';
 import { BarChart } from 'react-svg-chart';
@@ -22,6 +24,29 @@ const App = () => (
       { value: 4 },
       { value: 19 },
       { value: 10 },
+    ]}
+    height={ 400 }
+    width={ 600 }
+  />
+);
+```
+
+### Line chart
+
+```js
+import React from 'react';
+import { LineChart } from 'react-svg-chart';
+
+const App = () => (
+  <LineChart
+    lines={[
+      { points: [
+        { value: 11 },
+        { value: 27 },
+        { value: 4 },
+        { value: 19 },
+        { value: 10 },
+      ]},
     ]}
     height={ 400 }
     width={ 600 }
