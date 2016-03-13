@@ -33,12 +33,6 @@ const Page = ({ app }) => (
           padding: 40px 10px 10px 0;
           width: 100%;
         }
-
-        .chart:after {
-          content: "";
-          display: table;
-          clear: both;
-        }
       ` }</style>
     </head>
     <body>
