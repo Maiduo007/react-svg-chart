@@ -6,7 +6,7 @@ const days = [
     title: 'Thursday, 9th March',
     bars: [
       { label: 'travel', value: 0.00 },
-      { label: 'accomodation', value: 20.25 },
+      { label: 'accommodation', value: 20.25 },
       { label: 'food', value: 20.28 },
       { label: 'drink', value: 7.43 },
       { label: 'tourism', value: 13.50 },
@@ -16,7 +16,7 @@ const days = [
     title: 'Wednesday, 8th March',
     bars: [
       { label: 'travel', value: 13.50 },
-      { label: 'accomodation', value: 17.77 },
+      { label: 'accommodation', value: 17.77 },
       { label: 'food', value: 14.63 },
       { label: 'drink', value: 9.47 },
       { label: 'tourism', value: 0.00 },
@@ -26,7 +26,7 @@ const days = [
     title: 'Tuesday, 7th March',
     bars: [
       { label: 'travel', value: 138.88 },
-      { label: 'accomodation', value: 21.50 },
+      { label: 'accommodation', value: 21.50 },
       { label: 'food', value: 17.42 },
       { label: 'drink', value: 3.98 },
       { label: 'tourism', value: 0.00 },

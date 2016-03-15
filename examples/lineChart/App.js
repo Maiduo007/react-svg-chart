@@ -3,7 +3,7 @@ import { LineChart } from '../../src';
 
 const categories = [
   {
-    title: 'Accomodation',
+    title: 'Accommodation',
     points: [
       { label: 'Fri 17', value: 7.65 },
       { label: 'Sat 18', value: 25.50 },

@@ -2,6 +2,14 @@
 
 Animated SVG charts for React.
 
+![Line chart example](https://www.dropbox.com/s/vnm0u1k8orkc5n8/line-chart.gif?raw=1)
+
+[View line chart example code](./examples/lineChart)
+
+![Bar chart example](https://www.dropbox.com/s/xlmgpmml5og0q1j/bar-chart.gif?raw=1)
+
+[View bar chart example code](./examples/barChart)
+
 ## Installation
 
 ```
@@ -19,11 +27,11 @@ import { BarChart } from 'react-svg-chart';
 const App = () => (
   <BarChart
     bars={[
-      { value: 11 },
-      { value: 27 },
-      { value: 4 },
-      { value: 19 },
-      { value: 10 },
+      { label: 'travel', value: 11 },
+      { label: 'accomodation', value: 27 },
+      { label: 'food', value: 4 },
+      { label: 'drink', value: 19 },
+      { label: 'tourism', value: 10 },
     ]}
     height={ 400 }
     width={ 600 }
@@ -41,11 +49,11 @@ const App = () => (
   <LineChart
     lines={[
       { points: [
-        { value: 11 },
-        { value: 27 },
-        { value: 4 },
-        { value: 19 },
-        { value: 10 },
+        { label: 'travel', value: 11 },
+        { label: 'accommodation', value: 27 },
+        { label: 'food', value: 4 },
+        { label: 'drink', value: 19 },
+        { label: 'tourism', value: 10 },
       ]},
     ]}
     height={ 400 }
