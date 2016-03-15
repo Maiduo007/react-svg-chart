@@ -3,64 +3,203 @@ import tween from 'tweening';
 
 const LineChart = createClass({
   propTypes: {
-    chartClassName: PropTypes.string,
+    className: PropTypes.string,
+    description: PropTypes.string,
+    duration: PropTypes.number,
     easing: PropTypes.oneOfType([ PropTypes.func, PropTypes.string ]),
+    formatValue: PropTypes.func,
     height: PropTypes.number,
-    lineClassName: PropTypes.string,
+    labelHeight: PropTypes.number,
+    labelOffset: PropTypes.number,
     lines: PropTypes.array.isRequired,
+    pointSize: PropTypes.number,
     preserveAspectRatio: PropTypes.string,
+    showLabels: PropTypes.bool,
+    title: PropTypes.string,
+    valueHeight: PropTypes.number,
+    valueOffset: PropTypes.number,
+    valueRadius: PropTypes.number,
+    valueWidth: PropTypes.number,
     width: PropTypes.number,
   },
 
   getDefaultProps () {
     return {
+      className: '',
+      description: '',
       duration: 400,
       easing: 'easeInOutQuad',
+      formatValue: v => v,
       height: 500,
+      labelHeight: 50,
+      labelOffset: 10,
+      pointSize: 20,
       preserveAspectRatio: 'xMidYMid meet',
+      showLabels: true,
+      title: 'Line chart',
+      valueHeight: 30,
+      valueOffset: 35,
+      valueRadius: 2,
+      valueWidth: 60,
       width: 800,
     };
   },
 
   getInitialState () {
-    return {
-      lines: this.relativeLines( this.props.lines ),
-      spacing: this.props.width / ( this.props.lines.reduce(( p, c ) => {
-        return Math.max( p, c.points.length );
-      }, 0 ) - 1 ),
-    };
+    const { height, labelHeight, labelOffset, lines, showLabels, valueHeight, valueOffset } = this.props;
+    return this.calculateState({ height, labelHeight, labelOffset, lines, showLabels, valueHeight, valueOffset });
   },
 
-  componentWillReceiveProps ({ lines }) {
-    const relativeLines = this.relativeLines( lines );
-    if ( JSON.stringify( relativeLines ) !== JSON.stringify( this.state.lines )) {
-      this.animateLines( this.state.lines, relativeLines );
+  componentWillReceiveProps ({ height, labelHeight, labelOffset, lines, showLabels, valueHeight, valueOffset }) {
+    const { lines: nextLines, ...state } = this.calculateState({ height, labelHeight, labelOffset, lines, showLabels, valueHeight, valueOffset })
+
+    this.setState( state );
+
+    if ( JSON.stringify( nextLines ) !== JSON.stringify( this.state.lines )) {
+      this.animateLines( this.state.lines, nextLines );
     }
   },
 
   render () {
+    const pointSpacing = this.props.width / ( this.state.lines.reduce(( p, c ) => Math.max( p, c.points.length ), 0 ) + 1 );
+
     return (
       <svg
-        className={ this.props.chartClassName }
+        aria-describedby="line-chart-description"
+        aria-labelledby="line-chart-title"
+        class={ `line-chart ${ this.props.className }` }
         height={ this.props.height }
         preserveAspectRatio={ this.props.preserveAspectRatio }
         width={ this.props.width }
-        viewBox={ `0 0 ${ this.props.width } ${ this.props.height }` }
+        viewBox={ `0 -${ this.state.offsetTop } ${ this.props.width } ${ this.props.height }` }
       >
-        { this.state.lines.map(({ points }, i ) => (
-          <polyline
-            className={ this.props.lineClassName }
-            fill="none"
-            key={ i }
-            points={ points.map(( p, j ) => (
-              `${ this.state.spacing * j },${ p.value }`
-            )).join( ',' )}
-            stroke="rgb(241,76,84)"
-            strokeWidth="5"
+        <title id="line-chart-title">
+          { this.props.title }
+        </title>
+
+        <desc id="line-chart-description">
+          { this.props.description }
+        </desc>
+
+        <g class="line-chart__grid-x">
+          <line
+            stroke="rgb( 0, 0, 0 )"
+            x1="0"
+            x2={ this.props.width }
+            y1={ this.state.chartHeight }
+            y2={ this.state.chartHeight }
           />
+        </g>
+
+        <g class="line-chart__grid-y">
+          <line
+            stroke="rgb( 0, 0, 0 )"
+            x1="0"
+            x2="0"
+            y1="0"
+            y2={ this.state.chartHeight }
+          />
+        </g>
+
+        { this.state.lines.map(({ points }, i ) => (
+          <g
+            class="line-chart__group"
+            key={ i }
+          >
+            <polyline
+              class="line-chart__line"
+              fill="none"
+              points={ points.map(( p, j ) => (
+                `${ pointSpacing * ( j + 1 )},${ p.value }`
+              )).join( ',' )}
+              stroke="rgb( 0, 0, 0 )"
+              stroke-linejoin="round"
+              stroke-width="5"
+            />
+
+            { points.map(( p, j ) => {
+              const x = pointSpacing * ( j + 1 );
+              const value = this.props.lines[ i ].points[ j ].value;
+              const formattedValue = this.props.formatValue( value );
+
+              return (
+                <g
+                  class={ `line-chart__group${ p.label ? `line-chart__group--${ p.label }` : '' }` }
+                  key={ j }
+                >
+                  <circle
+                    aria-describedby={ `line-chart-value-${ p.label }` }
+                    aria-labelledby={ `line-chart-label-${ p.label }` }
+                    class="line-chart__point"
+                    cx={ x }
+                    cy={ p.value }
+                    r={ this.props.pointSize / 2 }
+                  />
+
+                  { this.props.showLabels ?
+                    <text
+                      class="line-chart__label"
+                      dominant-baseline="center"
+                      id={ `line-chart-label-${ p.label }` }
+                      text-anchor="middle"
+                      x={ x }
+                      y={ this.props.height - this.state.offsetTop - this.props.labelOffset }
+                    >
+                      { p.label }
+                    </text> :
+                    <title id={ `line-chart-label-${ p.label }` }>
+                      { p.label }
+                    </title>
+                  }
+
+                  <g>
+                    <rect
+                      class="line-chart__value-bg"
+                      fill="rgb( 255, 255, 255 )"
+                      height={ this.props.valueHeight }
+                      rx={ this.props.valueRadius }
+                      ry={ this.props.valueRadius }
+                      stroke="rgb( 0, 0, 0 )"
+                      stroke-width="1"
+                      width={ this.props.valueWidth }
+                      x={ x - this.props.valueWidth / 2 }
+                      y={ p.value - this.props.valueOffset - this.props.valueHeight / 2 }
+                    />
+                    <text
+                      class="line-chart__value"
+                      dominant-baseline="central"
+                      id={ `line-chart-value-${ p.label }` }
+                      x={ x }
+                      y={ p.value - this.props.valueOffset }
+                      text-anchor="middle"
+                    >
+                      { formattedValue }
+                    </text>
+                  </g>
+                </g>
+              );
+            })}
+          </g>
         ))}
       </svg>
     );
+  },
+
+  calculateState ({ height, labelHeight, labelOffset, lines, showLabels, valueHeight, valueOffset }) {
+    const offsetTop = valueOffset + valueHeight / 2;
+    const offsetBottom = showLabels ? labelOffset + labelHeight / 2 : 0;
+    const chartHeight = height - offsetTop - offsetBottom;
+
+    const scale = ( chartHeight / 100 ) / ( Math.max(
+      ...lines.map( l => Math.max( ...l.points.map( p => p.value )))
+    ) / 100 );
+
+    const relativeLines = lines.map( l => ({
+      ...l,
+      points: l.points.map( p => ({ ...p, value: chartHeight - ( p.value * scale )})),
+    }));
+
+    return { chartHeight, lines: relativeLines, offsetBottom, offsetTop, scale };
   },
 
   animateLines ( from, to ) {
@@ -71,19 +210,6 @@ const LineChart = createClass({
       to,
       next: lines => this.setState({ lines }),
     });
-  },
-
-  relativeLines ( lines ) {
-    const absolutePercent = this.props.height / 100;
-
-    const relativePercent = Math.max(
-      ...lines.map( l => Math.max( ...l.points.map( p => p.value )))
-    ) / 100;
-
-    return lines.map( l => ({
-      ...l,
-      points: l.points.map( p => ({ ...p, value: this.props.height - ( p.value / relativePercent * absolutePercent )})),
-    }));
   }
 });
 

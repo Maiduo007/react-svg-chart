@@ -1,47 +1,47 @@
 import React, { createClass } from 'react';
 import { LineChart } from '../../src';
 
-const days = [
+const categories = [
   {
-    title: 'Thursday, 9th March',
-    lines: [
-      {
-        points: [
-          { value: 3.50 },
-          { value: 7.45 },
-          { value: 1.27 },
-          { value: 1.15 },
-          { value: 2.93 },
-        ],
-      },
+    title: 'Accomodation',
+    points: [
+      { label: 'Fri 17', value: 7.65 },
+      { label: 'Sat 18', value: 25.50 },
+      { label: 'Sun 19', value: 21.55 },
+      { label: 'Mon 20', value: 21.55 },
+      { label: 'Tue 21', value: 21.55 },
+      { label: 'Wed 22', value: 21.55 },
+      { label: 'Thu 23', value: 39.82 },
+      { label: 'Fri 24', value: 39.82 },
+      { label: 'Sat 25', value: 39.82 },
     ],
   },
   {
-    title: 'Wednesday, 8th March',
-    lines: [
-      {
-        points: [
-          { value: 1.92 },
-          { value: 1.11 },
-          { value: 7.20 },
-          { value: 6.34 },
-          { value: 3.15 },
-        ],
-      },
+    title: 'Food',
+    points: [
+      { label: 'Fri 17', value: 5.46 },
+      { label: 'Sat 18', value: 5.71 },
+      { label: 'Sun 19', value: 9.79 },
+      { label: 'Mon 20', value: 9.03 },
+      { label: 'Tue 21', value: 13.52 },
+      { label: 'Wed 22', value: 12.50 },
+      { label: 'Thu 23', value: 15.56 },
+      { label: 'Fri 24', value: 9.18 },
+      { label: 'Sat 25', value: 9.44 },
     ],
   },
   {
-    title: 'Tuesday, 7th March',
-    lines: [
-      {
-        points: [
-          { value: 5.37 },
-          { value: 7.32 },
-          { value: 0.90 },
-          { value: 4.78 },
-          { value: 2.75 },
-        ],
-      },
+    title: 'Drink',
+    points: [
+      { label: 'Fri 17', value: 2.35 },
+      { label: 'Sat 18', value: 2.55 },
+      { label: 'Sun 19', value: 10.20 },
+      { label: 'Mon 20', value: 10.97 },
+      { label: 'Tue 21', value: 3.83 },
+      { label: 'Wed 22', value: 2.04 },
+      { label: 'Thu 23', value: 4.52 },
+      { label: 'Fri 24', value: 1.28 },
+      { label: 'Sat 25', value: 10.91 },
     ],
   },
 ];
@@ -49,13 +49,13 @@ const days = [
 const App = createClass({
   onChange ( e ) {
     this.setState({
-      day: days[ e.target.value ],
+      category: categories[ e.target.value ],
     });
   },
 
   getInitialState () {
     return {
-      day: days[ 0 ],
+      category: categories[ 0 ],
     };
   },
 
@@ -63,14 +63,21 @@ const App = createClass({
     return (
       <section className="content">
         <select onChange={ this.onChange }>
-          { days.map(( day, i ) => (
-            <option key={ i } value={ i }>{ day.title }</option>
+          { categories.map(( cat, i ) => (
+            <option key={ i } value={ i }>{ cat.title }</option>
           ))}
         </select>
         <LineChart
-          chartClassName="chart"
-          lines={ this.state.day.lines }
+          description={ `Amount of money spent on ${ this.state.category.title }` }
+          formatValue={ v => `£${ v.toFixed( 2 )}` }
+          lines={[{ points: this.state.category.points }]}
+          pointSize={ 18 }
+          labelSpacing={ 15 }
           preserveAspectRatio="xMinYMid meet"
+          title="Travel budget"
+          valueHeight={ 34 }
+          valueOffset={ 37 }
+          valueWidth={ 65 }
         />
       </section>
     );

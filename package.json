@@ -32,7 +32,7 @@
     "babel-preset-react": "^6.5.0",
     "commitizen": "^2.7.2",
     "cz-conventional-changelog": "^1.1.5",
-    "react": "^0.14.7",
+    "react": "^15.0.0-rc.1",
     "semantic-release": "^4.3.5"
   },
   "keywords": [
@@ -53,7 +53,7 @@
   "main": "lib/index.js",
   "name": "react-svg-chart",
   "peerDependencies": {
-    "react": "^0.14.7"
+    "react": "^15.0.0-rc.1"
   },
   "repository": {
     "type": "git",
