@@ -2,6 +2,14 @@
 
 Animated SVG charts for React.
 
+**3.9kb gzipped.**
+
+However, you're currently also going to have to bring
+[babel polyfill](https://cdnjs.com/libraries/babel-polyfill)
+to the party at an additional 30.8kb gzipped. This is to
+support Javascript generators which a dependency of this library
+makes use of.
+
 ![Line chart example](https://www.dropbox.com/s/vnm0u1k8orkc5n8/line-chart.gif?raw=1)
 
 [View line chart example code](./examples/lineChart)
