@@ -16,9 +16,9 @@ const LineChart = createClass({
     preserveAspectRatio: PropTypes.string,
     showLabels: PropTypes.bool,
     title: PropTypes.string,
+    valueBorderRadius: PropTypes.number,
     valueHeight: PropTypes.number,
     valueOffset: PropTypes.number,
-    valueRadius: PropTypes.number,
     valueWidth: PropTypes.number,
     width: PropTypes.number,
   },
@@ -37,9 +37,9 @@ const LineChart = createClass({
       preserveAspectRatio: 'xMidYMid meet',
       showLabels: true,
       title: 'Line chart',
+      valueBorderRadius: 2,
       valueHeight: 30,
       valueOffset: 35,
-      valueRadius: 2,
       valueWidth: 60,
       width: 800,
     };
@@ -157,8 +157,8 @@ const LineChart = createClass({
                       class="line-chart__value-bg"
                       fill="rgb( 255, 255, 255 )"
                       height={ this.props.valueHeight }
-                      rx={ this.props.valueRadius }
-                      ry={ this.props.valueRadius }
+                      rx={ this.props.valueBorderRadius }
+                      ry={ this.props.valueBorderRadius }
                       stroke="rgb( 0, 0, 0 )"
                       stroke-width="1"
                       width={ this.props.valueWidth }
