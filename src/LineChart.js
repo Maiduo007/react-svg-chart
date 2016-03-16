@@ -67,7 +67,7 @@ const LineChart = createClass({
       <svg
         aria-describedby="line-chart-description"
         aria-labelledby="line-chart-title"
-        class={ `line-chart ${ this.props.className }` }
+        className={ `line-chart ${ this.props.className }` }
         height={ this.props.height }
         preserveAspectRatio={ this.props.preserveAspectRatio }
         width={ this.props.width }
@@ -81,7 +81,7 @@ const LineChart = createClass({
           { this.props.description }
         </desc>
 
-        <g class="line-chart__grid-x">
+        <g className="line-chart__grid-x">
           <line
             stroke="rgb( 0, 0, 0 )"
             x1="0"
@@ -91,7 +91,7 @@ const LineChart = createClass({
           />
         </g>
 
-        <g class="line-chart__grid-y">
+        <g className="line-chart__grid-y">
           <line
             stroke="rgb( 0, 0, 0 )"
             x1="0"
@@ -103,18 +103,18 @@ const LineChart = createClass({
 
         { this.state.lines.map(({ points }, i ) => (
           <g
-            class="line-chart__group"
+            className="line-chart__group"
             key={ i }
           >
             <polyline
-              class="line-chart__line"
+              className="line-chart__line"
               fill="none"
               points={ points.map(( p, j ) => (
                 `${ pointSpacing * ( j + 1 )},${ p.value }`
               )).join( ',' )}
               stroke="rgb( 0, 0, 0 )"
-              stroke-linejoin="round"
-              stroke-width="5"
+              strokeLinejoin="round"
+              strokeWidth="5"
             />
 
             { points.map(( p, j ) => {
@@ -124,13 +124,13 @@ const LineChart = createClass({
 
               return (
                 <g
-                  class={ `line-chart__group${ p.label ? `line-chart__group--${ p.label }` : '' }` }
+                  className={ `line-chart__group${ p.label ? `line-chart__group--${ p.label }` : '' }` }
                   key={ j }
                 >
                   <circle
                     aria-describedby={ `line-chart-value-${ p.label }` }
                     aria-labelledby={ `line-chart-label-${ p.label }` }
-                    class="line-chart__point"
+                    className="line-chart__point"
                     cx={ x }
                     cy={ p.value }
                     r={ this.props.pointSize / 2 }
@@ -138,10 +138,10 @@ const LineChart = createClass({
 
                   { this.props.showLabels ?
                     <text
-                      class="line-chart__label"
-                      dominant-baseline="center"
+                      className="line-chart__label"
+                      dominantBaseline="center"
                       id={ `line-chart-label-${ p.label }` }
-                      text-anchor="middle"
+                      textAnchor="middle"
                       x={ x }
                       y={ this.props.height - this.state.offsetTop - this.props.labelOffset }
                     >
@@ -154,24 +154,24 @@ const LineChart = createClass({
 
                   <g>
                     <rect
-                      class="line-chart__value-bg"
+                      className="line-chart__value-bg"
                       fill="rgb( 255, 255, 255 )"
                       height={ this.props.valueHeight }
                       rx={ this.props.valueBorderRadius }
                       ry={ this.props.valueBorderRadius }
                       stroke="rgb( 0, 0, 0 )"
-                      stroke-width="1"
+                      strokeWidth="1"
                       width={ this.props.valueWidth }
                       x={ x - this.props.valueWidth / 2 }
                       y={ p.value - this.props.valueOffset - this.props.valueHeight / 2 }
                     />
                     <text
-                      class="line-chart__value"
-                      dominant-baseline="central"
+                      className="line-chart__value"
+                      dominantBaseline="central"
                       id={ `line-chart-value-${ p.label }` }
                       x={ x }
                       y={ p.value - this.props.valueOffset }
-                      text-anchor="middle"
+                      textAnchor="middle"
                     >
                       { formattedValue }
                     </text>

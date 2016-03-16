@@ -62,7 +62,7 @@ const BarChart = createClass({
       <svg
         aria-describedby="bar-chart-description"
         aria-labelledby="bar-chart-title"
-        class={ `bar-chart ${ this.props.className }` }
+        className={ `bar-chart ${ this.props.className }` }
         height={ this.props.height }
         preserveAspectRatio={ this.props.preserveAspectRatio }
         role="img"
@@ -87,13 +87,13 @@ const BarChart = createClass({
 
           return (
             <g
-              class={ `bar-chart__group${ bar.label ? `bar-chart__group--${ bar.label }` : '' }` }
+              className={ `bar-chart__group${ bar.label ? `bar-chart__group--${ bar.label }` : '' }` }
               key={ i }
             >
               <rect
                 aria-describedby={ `bar-chart-value-${ bar.label }` }
                 aria-labelledby={ `bar-chart-label-${ bar.label }` }
-                class="bar-chart__bar"
+                className="bar-chart__bar"
                 height={ barHeight }
                 width={ bar.value }
                 x={ 0 }
@@ -101,10 +101,10 @@ const BarChart = createClass({
               />
               { this.props.showLabels ?
                 <text
-                  class="bar-chart__label"
-                  dominant-baseline="middle"
+                  className="bar-chart__label"
+                  dominantBaseline="middle"
                   id={ `bar-chart-label-${ bar.label }` }
-                  text-anchor="end"
+                  textAnchor="end"
                   x={ -this.props.labelSpacing }
                   y={ textY }
                 >
@@ -115,11 +115,11 @@ const BarChart = createClass({
                 </title>
               }
               <text
-                class="bar-chart__value"
-                dominant-baseline="middle"
+                className="bar-chart__value"
+                dominantBaseline="middle"
                 fill={ valueInBar ? 'rgb( 255, 255, 255 )' : 'rgb( 0, 0, 0 )' }
                 id={ `bar-chart-value-${ bar.label }` }
-                text-anchor={ valueInBar ? 'end' : 'start' }
+                textAnchor={ valueInBar ? 'end' : 'start' }
                 x={ bar.value + ( valueInBar ? -this.props.valueSpacing : this.props.valueSpacing )}
                 y={ textY }
               >
@@ -129,7 +129,7 @@ const BarChart = createClass({
           );
         })}
 
-        <g class="bar-chart__grid-x">
+        <g className="bar-chart__grid-x">
           <line
             stroke="rgb( 0, 0, 0 )"
             x1="0"
@@ -139,7 +139,7 @@ const BarChart = createClass({
           />
         </g>
 
-        <g class="bar-chart__grid-y">
+        <g className="bar-chart__grid-y">
           <line
             stroke="rgb( 0, 0, 0 )"
             x1="0"
