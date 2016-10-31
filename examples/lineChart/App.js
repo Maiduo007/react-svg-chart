@@ -1,5 +1,5 @@
-import React, { createClass } from 'react';
-import { LineChart } from '../../src';
+import React, { createClass } from 'react'
+import { LineChart } from '../../src'
 
 const categories = [
   {
@@ -13,8 +13,8 @@ const categories = [
       { label: 'Wed 22', value: 21.55 },
       { label: 'Thu 23', value: 39.82 },
       { label: 'Fri 24', value: 39.82 },
-      { label: 'Sat 25', value: 39.82 },
-    ],
+      { label: 'Sat 25', value: 39.82 }
+    ]
   },
   {
     title: 'Food',
@@ -27,8 +27,8 @@ const categories = [
       { label: 'Wed 22', value: 12.50 },
       { label: 'Thu 23', value: 15.56 },
       { label: 'Fri 24', value: 9.18 },
-      { label: 'Sat 25', value: 9.44 },
-    ],
+      { label: 'Sat 25', value: 9.44 }
+    ]
   },
   {
     title: 'Drink',
@@ -41,47 +41,47 @@ const categories = [
       { label: 'Wed 22', value: 2.04 },
       { label: 'Thu 23', value: 4.52 },
       { label: 'Fri 24', value: 1.28 },
-      { label: 'Sat 25', value: 10.91 },
-    ],
-  },
-];
+      { label: 'Sat 25', value: 10.91 }
+    ]
+  }
+]
 
 const App = createClass({
-  onChange ( e ) {
+  onChange (e) {
     this.setState({
-      category: categories[ e.target.value ],
-    });
+      category: categories[ e.target.value ]
+    })
   },
 
   getInitialState () {
     return {
-      category: categories[ 0 ],
-    };
+      category: categories[ 0 ]
+    }
   },
 
   render () {
     return (
-      <section className="content">
-        <select onChange={ this.onChange }>
-          { categories.map(( cat, i ) => (
-            <option key={ i } value={ i }>{ cat.title }</option>
+      <section className='content'>
+        <select onChange={this.onChange}>
+          { categories.map((cat, i) => (
+            <option key={i} value={i}>{ cat.title }</option>
           ))}
         </select>
         <LineChart
-          description={ `Amount of money spent on ${ this.state.category.title }` }
-          formatValue={ v => `£${ v.toFixed( 2 )}` }
+          description={`Amount of money spent on ${this.state.category.title}`}
+          formatValue={v => `£${v.toFixed(2)}`}
           lines={[{ points: this.state.category.points }]}
-          pointSize={ 18 }
-          labelSpacing={ 15 }
-          preserveAspectRatio="xMinYMid meet"
-          title="Travel budget"
-          valueHeight={ 34 }
-          valueOffset={ 37 }
-          valueWidth={ 65 }
+          pointSize={18}
+          labelSpacing={15}
+          preserveAspectRatio='xMinYMid meet'
+          title='Travel budget'
+          valueHeight={34}
+          valueOffset={37}
+          valueWidth={65}
         />
       </section>
-    );
+    )
   }
-});
+})
 
-export default App;
+export default App

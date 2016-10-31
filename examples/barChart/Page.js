@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 const propTypes = {
-  app: PropTypes.string.isRequired,
-};
+  app: PropTypes.string.isRequired
+}
 
 const Page = ({ app }) => (
-  <html lang="en">
+  <html lang='en'>
     <head>
       <style>{ `
         html {
@@ -75,12 +75,12 @@ const Page = ({ app }) => (
       ` }</style>
     </head>
     <body>
-      <section className="app" dangerouslySetInnerHTML={{ __html: app }} />
-      <script src="/client.dist.js" />
+      <section className='app' dangerouslySetInnerHTML={{ __html: app }} />
+      <script src='/client.dist.js' />
     </body>
   </html>
-);
+)
 
-Page.propTypes = propTypes;
+Page.propTypes = propTypes
 
-export default Page;
+export default Page
