@@ -14,11 +14,11 @@ library makes use of.
 
 ## Examples
 
-![Line chart example](https://www.dropbox.com/s/vnm0u1k8orkc5n8/line-chart.gif?raw=1)
+![Line chart example](https://www.dropbox.com/s/txatue50qmw87ij/line-chart.gif?raw=1)
 
 [View line chart example code](./examples/lineChart)
 
-![Bar chart example](https://www.dropbox.com/s/xlmgpmml5og0q1j/bar-chart.gif?raw=1)
+![Bar chart example](https://www.dropbox.com/s/a4dofz0cay5ogbu/bar-chart.gif?raw=1)
 
 [View bar chart example code](./examples/barChart)
 
